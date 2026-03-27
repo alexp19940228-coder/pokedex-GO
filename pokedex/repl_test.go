@@ -36,3 +36,10 @@ func TestCleanInput(t *testing.T) {
 		}
 	}
 }
+
+func TestCommandMap(t *testing.T) {
+	err := commandMap()
+	if err != nil {
+		t.Errorf("commandMap() returned an error: %v", err)
+	}
+}
