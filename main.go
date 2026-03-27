@@ -14,8 +14,19 @@ func main() {
 		scanner.Scan()
 		userInput := scanner.Text()
 		cleanedInput := cleanInput(userInput)
-		firstWord := cleanedInput[0]
-		fmt.Printf("Your command was: %s\n", firstWord)
+		if len(cleanedInput) == 0 {
+			continue
+		}
+		commandName := cleanedInput[0]
+		if command, exists := commands[commandName]; exists {
+			err := command.callback()
+			if err != nil {
+				fmt.Printf("Error executing command '%s': %v\n", commandName, err)
+			}
+		} else {
+			fmt.Printf("Unknown command: '%s'. Type 'help' for a list of commands.\n", commandName)
+		}
+
 	}
 
 }
